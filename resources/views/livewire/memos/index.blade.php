@@ -16,7 +16,9 @@ $create = function () {
 
     <ul>
         @foreach ($memos as $memo)
-            <li><a href="{{ route('memos.show', $memo) }}">{{ $memo->title }}</a></li>
+            <li><a href="{{ route('memos.show', $memo) }}"> {{ $memo->title }}
+                    [{{ $memo->priority_text }}]</a>
+            </li>
         @endforeach
     </ul>
 

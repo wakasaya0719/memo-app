@@ -3,7 +3,7 @@
 use function Livewire\Volt\{state, mount, rules};
 use App\Models\Memo;
 
-state(['memo', 'title', 'body']);
+state(['memo', 'title', 'body', 'priority' => 1]);
 
 mount(function (Memo $memo) {
     $this->memo = $memo;
@@ -22,6 +22,7 @@ $update = function () {
 rules([
     'title' => 'required|string|max:50',
     'body' => 'required|string|max:2000',
+    'priority' => 'required|integer|min:1|max:3',
 ]);
 
 ?>
@@ -46,6 +47,18 @@ rules([
             @enderror
             <br>
             <textarea wire:model="body" id="body"></textarea>
+        </p>
+        <p>
+            <label for="priority">優先度</label>
+            @error('priority')
+                <span class="error">({{ $message }})</span>
+            @enderror
+            <br>
+            <select wire:model="priority" id="priority">
+                <option value="1">低</option>
+                <option value="2">中</option>
+                <option value="3">高</option>
+            </select>
         </p>
 
         <button type="submit">更新</button>
